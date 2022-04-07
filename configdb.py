@@ -11,7 +11,7 @@ USER_PACK = ['STANDART', 'PREMIUM']
 async def sql_add_command(USER_DATA5, USER_ID, USER_PACK):
     USER_DATA5['user_id'] = USER_ID['id']
     USER_DATA5['user_pack'] = USER_PACK
-    conn = await aiomysql.connect(host="localhost", user="test", password="1234", db="testdb", loop=loop)
+    conn = await aiomysql.connect(host="192.168.1.126", user="test", password="1234", db="testdb", loop=loop)
     cur = await conn.cursor()
     await cur.execute("""INSERT INTO table1 (Name,Inst_Name,Phone,Date,time,id_User,Packet) 
     VALUES  (%s,%s,%s,%s,%s,%s,%s)""", tuple(USER_DATA5.values()))
@@ -20,7 +20,7 @@ async def sql_add_command(USER_DATA5, USER_ID, USER_PACK):
 
 
 async def sql_replace_commands(USER_DATA):
-    conn1 = await aiomysql.connect(host="localhost", user="test", password="1234", db="testdb", loop=loop)
+    conn1 = await aiomysql.connect(host="192.168.1.126", user="test", password="1234", db="testdb", loop=loop)
     cur = await conn1.cursor()
     data = USER_DATA['date']
     data_replace = datetime.strptime(data, '%d.%m.%Y').date()
@@ -30,7 +30,7 @@ async def sql_replace_commands(USER_DATA):
 
 
 async def sql_select_freedate(User_text):
-    conn2 = await aiomysql.connect(host="localhost", user="test", password="1234", db="testdb", loop=loop)
+    conn2 = await aiomysql.connect(host="192.168.1.126", user="test", password="1234", db="testdb", loop=loop)
     cur = await conn2.cursor()
     await cur.execute("""SELECT idDATAREG FROM datareg WHERE idDATAREG > CURRENT_DATE() and DATAREGcol < 1 limit 4;""")
     r = await cur.fetchall()
